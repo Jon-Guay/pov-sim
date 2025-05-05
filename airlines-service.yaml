@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --build local
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: airlines
+    app: pov-sim
+    component: airlines
+  name: airlines
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    component: airlines

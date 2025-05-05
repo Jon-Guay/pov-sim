@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --build local
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: flights
+    app: pov-sim
+    component: flights
+  name: flights
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: flights
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --build local
+        kompose.version: 1.34.0 (cbf2835db)
+      labels:
+        app: pov-sim
+        component: flights
+    spec:
+      containers:
+        - image: pov-sim-flights
+          imagePullPolicy: Never
+          name: pov-sim-flights
+          ports:
+            - containerPort: 5001
+              protocol: TCP
+      restartPolicy: Always
